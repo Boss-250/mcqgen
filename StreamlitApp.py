@@ -32,7 +32,7 @@ with st.form("user_inputs"):
             except Exception as e:
                 traceback.print_exception(type(e), e, e.__traceback__)
                 st.error("Error")
-                
+
         if isinstance(response, dict):    
             quiz = response.get("quiz", None)
             if quiz is not None:

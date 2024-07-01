@@ -3,7 +3,6 @@ import pandas as pd
 from dotenv import load_dotenv
 from src.mcqgenerator.utils import read_file,get_table_data
 from src.mcqgenerator.logger import logging
-
 from langchain_ai21 import ChatAI21
 from langchain_core.prompts import PromptTemplate
 from langchain.chains.llm import LLMChain
@@ -66,7 +65,5 @@ review_chain = LLMChain = llm | prompt2 | key2
 generate_evaluate_chain = SequentialChain(chains=[quiz_chain, review_chain], 
                                           input_variables=["text", "number", "subject", "tone", "response_json"],
                                           output_variables=["quiz", "review"],verbose=True)
-
-
 
 
