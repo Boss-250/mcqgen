@@ -2,8 +2,7 @@ Metadata-Version: 2.1
 Name: mcqgenerator
 Version: 0.0.1
 Author: muruganantham
-Author-email: murug@gmail.com
-Requires-Dist: openai
+Author-email: muruganantham.k307@gmail.com
 Requires-Dist: langchain
 Requires-Dist: streamlit
 Requires-Dist: python-dotenv

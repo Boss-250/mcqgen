@@ -8,8 +8,10 @@ import streamlit as st
 from src.mcqgenerator.MCQGenerator import generate_evaluate_chain
 from src.mcqgenerator.logger import logging
 
-with open('/home/kube/mcqgen/Response.json') as file:
-    RESPONCE_JSON = json.loads(file)
+with open("/home/kube/mcqgen/Response.json","r") as file:
+    
+
+    RESPONSE_JSON = json.loads(file.read())
 
 st.title("MCQs Creator Application with langchain 🦜️🔗")
 
@@ -28,7 +30,7 @@ with st.form("user_inputs"):
         with st.spinner("loading..."): 
             try:
                text = read_file(uploaded_file)
-               response = generate_evaluate_chain(text,mcq_count,subject,tone,)
+               response = generate_evaluate_chain(text = text,mcq_count=mcq_count,subject=subject,tone=tone,)
             except Exception as e:
                 traceback.print_exception(type(e), e, e.__traceback__)
                 st.error("Error")

@@ -1,4 +1,5 @@
 import os
+from getpass import getpass
 import pandas as pd
 from dotenv import load_dotenv
 from src.mcqgenerator.utils import read_file,get_table_data
@@ -10,9 +11,11 @@ from langchain.chains.sequential import SequentialChain
 
 load_dotenv()
 
-key = os.getenv("AI21_API_KEY")
+api_key = os.environ["AI21_API_KEY"]    
 
-llm = ChatAI21(api_key = key, model = "jamba-instruct-preview", temprature = 0.7)
+
+
+llm = ChatAI21(api_key = api_key, model = "jamba-instruct-preview", temprature = 0.7)
 
 template = """
 Text:{text}
@@ -35,9 +38,8 @@ prompt1 = quiz_generation_prompt
 
 key = output_key1 = "quiz"
 
-LLMChain = prompt1 | llm | key
+quiz_chain = LLMChain = prompt1 | llm | key
 
-quiz_chain = LLMChain
 
 template2 = """
 You are an expert english grammarian and writer. Given a Multiple choice Quiz {subject} students.\
@@ -57,7 +59,9 @@ quiz_evaluation_prompt = PromptTemplate(
 
 prompt2 = quiz_evaluation_prompt
 
-key2 = output_key2 = ["review"]
+output_key2 = ["review"]
+
+key2 = output_key2
 
 review_chain = LLMChain = llm | prompt2 | key2
 
@@ -65,5 +69,4 @@ review_chain = LLMChain = llm | prompt2 | key2
 generate_evaluate_chain = SequentialChain(chains=[quiz_chain, review_chain], 
                                           input_variables=["text", "number", "subject", "tone", "response_json"],
                                           output_variables=["quiz", "review"],verbose=True)
-
 
